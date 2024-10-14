@@ -13,10 +13,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 1. To get started with the development server, run the following commands:
 
-            ```bash
-            npm run dev
-            # or
-            yarn dev
-            ```
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
+
 2. Then, open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
-3. You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+3. You can start editing the page by modifying `pages/index.jsx`. The page auto-updates as you edit the file.
