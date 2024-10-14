@@ -7,7 +7,7 @@ export default function Learn() {
   return (
     <div>
       <Info />
-      {/* <div className="Board" style={{ width: WIDTH, height: HEIGHT }}></div> */}
+      {/* <div className="Learn" style={{ width: WIDTH, height: HEIGHT }}></div> */}
     </div>
   )
 }

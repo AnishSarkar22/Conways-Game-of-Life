@@ -1,50 +1,216 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
+import EastIcon from "@mui/icons-material/East";
 
-const GameOfLifeRules = () => {
+const Home = () => {
+  const gridStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 50px)",
+    gridTemplateRows: "repeat(3, 50px)",
+    gap: "1px",
+    backgroundColor: "#ccc",
+    width: "fit-content",
+    padding: "1px",
+  };
+
+  const cellStyle = {
+    width: "50px",
+    height: "50px",
+    backgroundColor: "#f0f0f0",
+  };
+
+  const yellowCellStyle = {
+    ...cellStyle,
+    backgroundColor: "yellow",
+  };
+  const grayCellStyle = {
+    ...cellStyle,
+    backgroundColor: "gray",
+  };
+  const fontFamilyStyle = {
+    fontFamily:
+      "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  };
+
   return (
-    <>
-      <Head>
-        <title>Conway's Game of Life Rules</title>
-        <meta name="description" content="Rules for Conway's Game of Life" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div
+      style={{
+        ...fontFamilyStyle,
+        padding: "20px",
+      }}
+    >
+      <h1 style={{ fontWeight: "700" }}>Rules</h1>
 
-      <main className="container mx-auto p-8 bg-gray-100 text-gray-800">
-        <h1 className="text-4xl font-bold mb-8">Rules</h1>
-        
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">For a space that is populated:</h2>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>Each cell with one or no neighbors dies, as if by solitude.</li>
-            <li>Each cell with four or more neighbors dies, as if by overpopulation.</li>
-            <li>Each cell with two or three neighbors survives.</li>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        {/* Rules Section */}
+        <div style={{ 
+          flex: "0 0 45%", 
+          padding: "10px", 
+          borderRadius: "8px",
+          marginRight: "10px"
+        }}>
+          <h2 style={{ marginBottom: "20px" }}>For a space that is populated:</h2>
+          <ul style={{ listStyleType: "none", padding: 0, lineHeight: "1.8" }}>
+            <li>• Each cell with one or no neighbors dies, as if by solitude.</li>
+            <li>• Each cell with four or more neighbors dies, as if by overpopulation.</li>
+            <li>• Each cell with two or three neighbors survives.</li>
           </ul>
-        </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">For a space that is empty or unpopulated:</h2>
-          <ul className="list-disc pl-5">
-            <li>Each cell with three neighbors becomes populated.</li>
+          <h2 style={{ marginTop: "30px", marginBottom: "20px" }}>For a space that is empty or unpopulated:</h2>
+          <ul style={{ listStyleType: "none", padding: 0, lineHeight: "1.8" }}>
+            <li>• Each cell with three neighbors becomes populated.</li>
           </ul>
-        </section>
+        </div>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Examples</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Placeholder for example images */}
-            {[1, 2, 3, 4].map((index) => (
-              <div key={index} className="flex items-center justify-between bg-white p-4 rounded-lg shadow">
-                <div className="w-20 h-20 bg-gray-300">{/* Before image */}</div>
-                <div className="text-2xl">➡️</div>
-                <div className="w-20 h-20 bg-gray-300">{/* After image */}</div>
+
+        {/* Examples Section */}
+
+        <div style={{ marginLeft: "100px" }}>
+          <h2>Examples</h2>
+          <div>
+            {/* Our new 3x3 grid example */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+                width: "80%", 
+    height: "80%",
+              }}
+            >
+              <div style={gridStyle}>
+                <div style={yellowCellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={yellowCellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
               </div>
-            ))}
+              <span style={{ fontSize: "20px", margin: "0 15px" }}>
+                <EastIcon />
+              </span>
+              <div style={gridStyle}>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={grayCellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+                <div style={cellStyle}></div>
+              </div>
+            </div>
+
+            {/* Existing examples */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <div style={gridStyle}>
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={yellowCellStyle} />
+              </div>
+              <span style={{ fontSize: "20px", margin: "0 15px" }}>
+                <EastIcon />
+              </span>
+              <div style={gridStyle}>
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={grayCellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={yellowCellStyle} />
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <div style={gridStyle}>
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+              </div>
+              <span style={{ fontSize: "20px", margin: "0 15px" }}>
+                <EastIcon />
+              </span>
+              <div style={gridStyle}>
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
+              <div style={gridStyle}>
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={grayCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+              </div>
+              <span style={{ fontSize: "20px", margin: "0 15px" }}>
+                <EastIcon />
+              </span>
+              <div style={gridStyle}>
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={yellowCellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+                <div style={cellStyle} />
+              </div>
+            </div>
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default GameOfLifeRules;
+export default Home;
