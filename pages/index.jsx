@@ -68,7 +68,7 @@ export default function Home() {
         }
 
         .title {
-          margin: 0 0 2rem;
+          margin: 2rem 0 2rem;
           line-height: 1.15;
           font-size: 3.3rem;
           font-weight: 700;

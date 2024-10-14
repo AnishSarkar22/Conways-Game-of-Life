@@ -1,6 +1,6 @@
 # Conway's Game of Life
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). This also uses [Material UI](https://github.com/mui/material-ui).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). This also uses [Material UI](https://github.com/mui/material-ui). (I have also added a python version of Game of Life)
 
 ## The rules for [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
