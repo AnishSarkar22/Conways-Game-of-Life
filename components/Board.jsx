@@ -10,7 +10,12 @@ import {
   createTheme,
   useMediaQuery,
 } from "@mui/material";
-import { PlayArrow, Stop, Clear, Shuffle } from "@mui/icons-material";
+import {
+  PlayArrowRounded,
+  StopRounded,
+  DeleteOutlineRounded,
+  LoopRounded,
+} from "@mui/icons-material";
 
 const theme = createTheme({
   palette: {
@@ -103,9 +108,9 @@ const GameOfLife = () => {
             return acc + (g[newI][newJ] ? 1 : 0);
           }, 0);
 
-          if (neighbors < 2 || neighbors > 3) return false;
-          if (neighbors === 3) return true;
-          return g[i][j];
+          if (cell && (neighbors === 2 || neighbors === 3)) return true;
+          if (!cell && neighbors === 3) return true;
+          return false;
         })
       );
 
@@ -139,36 +144,46 @@ const GameOfLife = () => {
               fontFamily: theme.typography.fontFamily,
               color: "#2D3748",
               fontSize: "2rem",
-              fontWeight: 700, // Added font weight
+              fontWeight: 700,
               textAlign: "center",
+              paddingBottom: "20px",
             }}
           >
             Game of Life
           </Typography>
-          <Box sx={{ mb: 2 }}>
+          <Box
+            sx={{
+              mb: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <Typography
               variant="subtitle1"
               gutterBottom
-              align="center"
               sx={{
                 fontFamily: theme.typography.fontFamily,
                 color: "#2D3748",
                 fontWeight: 450,
+                marginRight: 2, // Add some space between the text and the slider
+                fontSize: "0.9rem",
               }}
             >
-              Speed: {speed} generations/second
+              Speed: {speed} gen/s
             </Typography>
             <Slider
               value={speed}
               onChange={(_, newValue) => setSpeed(newValue)}
               min={1}
-              max={10}
+              max={20}
               step={1}
-              marks
+              // marks
               valueLabelDisplay="auto"
               valueLabelFormat={(value) => `${value} gen/s`}
               sx={{
                 color: "#3B4852",
+                width: 200,
               }}
             />
           </Box>
@@ -185,7 +200,7 @@ const GameOfLife = () => {
               fullWidth={isMobile}
               variant="contained"
               color="primary"
-              startIcon={isRunning ? <Stop /> : <PlayArrow />}
+              startIcon={isRunning ? <StopRounded /> : <PlayArrowRounded />}
               onClick={() => setIsRunning(!isRunning)}
             >
               {isRunning ? "Stop" : "Start"}
@@ -193,7 +208,7 @@ const GameOfLife = () => {
             <Button
               fullWidth={isMobile}
               variant="outlined"
-              startIcon={<Clear />}
+              startIcon={<DeleteOutlineRounded />}
               onClick={clearGrid}
             >
               Clear
@@ -201,7 +216,7 @@ const GameOfLife = () => {
             <Button
               fullWidth={isMobile}
               variant="outlined"
-              startIcon={<Shuffle />}
+              startIcon={<LoopRounded />}
               onClick={randomizeGrid}
             >
               Randomize

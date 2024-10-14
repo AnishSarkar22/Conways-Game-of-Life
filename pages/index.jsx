@@ -28,7 +28,7 @@ export default function Home() {
             {[
               { title: "Play", href: "/game", description: "A Web Application which simulates Conway's Game of Life." },
               { title: "Learn", href: "/learn", description: "Read and learn more about the game, its history and its implications." },
-              { title: "Source", href: "#", description: "See the source code behind this application here on Github." },
+              { title: "Source", href: "https://github.com/AnishSarkar22/Conways-Game-of-Life", description: "See the source code behind this application here on Github." },
               { title: "About", href: "https://github.com/AnishSarkar22", description: "Find out more about the people behind this application." }
             ].map((card, index) => (
               <div 
