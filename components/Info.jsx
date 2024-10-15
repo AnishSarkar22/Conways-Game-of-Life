@@ -22,6 +22,10 @@ const Home = () => {
     ...cellStyle,
     backgroundColor: "yellow",
   };
+  const orangeCellStyle = {
+    ...cellStyle,
+    backgroundColor: "orange",
+  };
   const grayCellStyle = {
     ...cellStyle,
     backgroundColor: "gray",
@@ -36,6 +40,7 @@ const Home = () => {
       style={{
         ...fontFamilyStyle,
         padding: "20px",
+        width: "100%",
       }}
     >
       <h1 style={{ fontWeight: "700" }}>Rules</h1>
@@ -64,7 +69,7 @@ const Home = () => {
 
         {/* Examples Section */}
 
-        <div style={{ marginLeft: "100px" }}>
+        <div style={{ marginLeft: "100px", marginTop: "-70px", width: "100%" }}>
           <h2>Examples</h2>
           <div>
             {/* Our new 3x3 grid example */}
@@ -73,8 +78,8 @@ const Home = () => {
                 display: "flex",
                 alignItems: "center",
                 marginBottom: "10px",
-                width: "80%", 
-    height: "80%",
+                width: "10%", 
+    height: "10%",
               }}
             >
               <div style={gridStyle}>
@@ -82,7 +87,7 @@ const Home = () => {
                 <div style={cellStyle}></div>
                 <div style={cellStyle}></div>
                 <div style={cellStyle}></div>
-                <div style={yellowCellStyle}></div>
+                <div style={orangeCellStyle}></div>
                 <div style={cellStyle}></div>
                 <div style={cellStyle}></div>
                 <div style={cellStyle}></div>

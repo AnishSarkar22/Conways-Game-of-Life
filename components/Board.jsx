@@ -174,16 +174,28 @@ const GameOfLife = () => {
             </Typography>
             <Slider
               value={speed}
-              onChange={(_, newValue) => setSpeed(newValue)}
+              onChange={(_, newValue) => setSpeed(Number(newValue))}
               min={1}
               max={20}
               step={1}
-              // marks
               valueLabelDisplay="auto"
               valueLabelFormat={(value) => `${value} gen/s`}
               sx={{
                 color: "#3B4852",
                 width: 200,
+                "& .MuiSlider-thumb": {
+                  backgroundColor: "#fff",
+                  border: "2px solid currentColor",
+                },
+                "& .MuiSlider-track": {
+                  backgroundColor: "#3B4852",
+                },
+                "& .MuiSlider-rail": {
+                  backgroundColor: "#d8d8d8",
+                },
+                "& .MuiSlider-valueLabel": {
+                  backgroundColor: "#3B4852",
+                },
               }}
             />
           </Box>
