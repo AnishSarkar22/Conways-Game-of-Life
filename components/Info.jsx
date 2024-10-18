@@ -1,216 +1,155 @@
 import React from "react";
-import EastIcon from "@mui/icons-material/East";
+import EastRoundedIcon from '@mui/icons-material/EastRounded';
 
-const Home = () => {
-  const gridStyle = {
+const CELL_SIZE = 35;
+const GRID_SIZE = 3;
+
+const CellColors = {
+  DEFAULT: "#f0f0f0",
+  YELLOW: "yellow",
+  ORANGE: "orange",
+  GRAY: "gray",
+};
+
+const styles = {
+  container: {
+    fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    padding: "20px",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    color: "#2D3748",
+  },
+  contentWrapper: {
+    maxWidth: "1200px",
+    width: "100%",
+  },
+  grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(3, 50px)",
-    gridTemplateRows: "repeat(3, 50px)",
+    gridTemplateColumns: `repeat(${GRID_SIZE}, ${CELL_SIZE}px)`,
+    gridTemplateRows: `repeat(${GRID_SIZE}, ${CELL_SIZE}px)`,
     gap: "1px",
     backgroundColor: "#ccc",
     width: "fit-content",
     padding: "1px",
-  };
+  },
+  cell: (color = CellColors.DEFAULT) => ({
+    width: `${CELL_SIZE}px`,
+    height: `${CELL_SIZE}px`,
+    backgroundColor: color,
+  }),
+  rulesSection: {
+    flex: "0 0 80%", 
+    padding: "10px",
+    borderRadius: "8px",
+    marginRight: "10px",
+    marginLeft: "-100px",
 
-  const cellStyle = {
-    width: "50px",
-    height: "50px",
-    backgroundColor: "#f0f0f0",
-  };
+  },
+  examplesSection: {
+    flex: "0 0 20%", 
+    paddingLeft: "20px",
+    marginTop: "-10px",
+  },
+  exampleRow: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "45px",
+  },
+  title: {
+    fontWeight: "700", 
+    textAlign: "center",
+    marginBottom: "30px",
+  },
+  ruleList: {
+    listStyleType: "none", 
+    padding: 0, 
+    lineHeight: "8.5",
+    letterSpacing: "0.5px",
+  },
+};
 
-  const yellowCellStyle = {
-    ...cellStyle,
-    backgroundColor: "yellow",
-  };
-  const orangeCellStyle = {
-    ...cellStyle,
-    backgroundColor: "orange",
-  };
-  const grayCellStyle = {
-    ...cellStyle,
-    backgroundColor: "gray",
-  };
-  const fontFamilyStyle = {
-    fontFamily:
-      "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  };
+const RuleList = ({ title, rules }) => (
+  <>
+    <h2 style={{ marginBottom: "20px", marginTop: title.includes("empty") ? "30px" : "0px" }}>{title}</h2>
+    <ul style={styles.ruleList}>
+      {rules.map((rule, index) => (
+        <li key={index}>• {rule}</li>
+      ))}
+    </ul>
+  </>
+);
+
+const Grid = ({ cellColors }) => (
+  <div style={styles.grid}>
+    {cellColors.map((color, index) => (
+      <div key={index} style={styles.cell(color)} />
+    ))}
+  </div>
+);
+
+const Example = ({ before, after, isLastTwo }) => (
+  <div style={{
+    ...styles.exampleRow,
+    marginBottom: isLastTwo ? '70px' : '45px', // Increase space for last two rows
+  }}>
+    <Grid cellColors={before} />
+    <span style={{ fontSize: "20px", margin: "0 15px" }}>
+      <EastRoundedIcon />
+    </span>
+    <Grid cellColors={after} />
+  </div>
+);
+
+const GameOfLifeRules = () => {
+  const populatedRules = [
+    "Each cell with one or no neighbors dies, as if by solitude.",
+    "Each cell with four or more neighbors dies, as if by overpopulation.",
+    "Each cell with two or three neighbors survives.",
+  ];
+
+  const emptyRules = [
+    "Each cell with three neighbors becomes populated.",
+  ];
+
+  const examples = [
+    {
+      before: [CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.ORANGE, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT],
+      after: [CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.GRAY, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT],
+    },
+    {
+      before: [CellColors.YELLOW, CellColors.DEFAULT, CellColors.YELLOW, CellColors.YELLOW, CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW, CellColors.YELLOW],
+      after: [CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW, CellColors.GRAY, CellColors.DEFAULT, CellColors.YELLOW, CellColors.YELLOW, CellColors.YELLOW],
+    },
+    {
+      before: [CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW, CellColors.DEFAULT],
+      after: [CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW, CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT],
+    },
+    {
+      before: [CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW, CellColors.GRAY, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW],
+      after: [CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.YELLOW, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT, CellColors.DEFAULT],
+    },
+  ];
 
   return (
-    <div
-      style={{
-        ...fontFamilyStyle,
-        padding: "20px",
-        width: "100%",
-      }}
-    >
-      <h1 style={{ fontWeight: "700" }}>Rules</h1>
-
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        {/* Rules Section */}
-        <div style={{ 
-          flex: "0 0 45%", 
-          padding: "10px", 
-          borderRadius: "8px",
-          marginRight: "10px"
-        }}>
-          <h2 style={{ marginBottom: "20px" }}>For a space that is populated:</h2>
-          <ul style={{ listStyleType: "none", padding: 0, lineHeight: "1.8" }}>
-            <li>• Each cell with one or no neighbors dies, as if by solitude.</li>
-            <li>• Each cell with four or more neighbors dies, as if by overpopulation.</li>
-            <li>• Each cell with two or three neighbors survives.</li>
-          </ul>
-
-          <h2 style={{ marginTop: "30px", marginBottom: "20px" }}>For a space that is empty or unpopulated:</h2>
-          <ul style={{ listStyleType: "none", padding: 0, lineHeight: "1.8" }}>
-            <li>• Each cell with three neighbors becomes populated.</li>
-          </ul>
-        </div>
-
-
-        {/* Examples Section */}
-
-        <div style={{ marginLeft: "100px", marginTop: "-70px", width: "100%" }}>
-          <h2>Examples</h2>
-          <div>
-            {/* Our new 3x3 grid example */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px",
-                width: "10%", 
-    height: "10%",
-              }}
-            >
-              <div style={gridStyle}>
-                <div style={yellowCellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={orangeCellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-              </div>
-              <span style={{ fontSize: "20px", margin: "0 15px" }}>
-                <EastIcon />
-              </span>
-              <div style={gridStyle}>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={grayCellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-                <div style={cellStyle}></div>
-              </div>
-            </div>
-
-            {/* Existing examples */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px",
-              }}
-            >
-              <div style={gridStyle}>
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={yellowCellStyle} />
-              </div>
-              <span style={{ fontSize: "20px", margin: "0 15px" }}>
-                <EastIcon />
-              </span>
-              <div style={gridStyle}>
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={grayCellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={yellowCellStyle} />
-              </div>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px",
-              }}
-            >
-              <div style={gridStyle}>
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-              </div>
-              <span style={{ fontSize: "20px", margin: "0 15px" }}>
-                <EastIcon />
-              </span>
-              <div style={gridStyle}>
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-              </div>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px",
-              }}
-            >
-              <div style={gridStyle}>
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={grayCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-              </div>
-              <span style={{ fontSize: "20px", margin: "0 15px" }}>
-                <EastIcon />
-              </span>
-              <div style={gridStyle}>
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={yellowCellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-                <div style={cellStyle} />
-              </div>
-            </div>
+    <div style={styles.container}>
+      <div style={styles.contentWrapper}>
+        <h1 style={styles.title}>Rules</h1>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <div style={styles.rulesSection}>
+            <RuleList title="For a space that is populated:" rules={populatedRules} />
+            <RuleList title="For a space that is empty or unpopulated:" rules={emptyRules} />
+          </div>
+          <div style={styles.examplesSection}>
+            <h2>Examples</h2>
+            {examples.map((example, index) => (
+              <Example 
+                key={index} 
+                before={example.before} 
+                after={example.after} 
+                isLastTwo={index >= examples.length - 2} // Pass true for last two examples
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -218,4 +157,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default GameOfLifeRules;
