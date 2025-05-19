@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Conway's Game of Life"
+version = "1.0.0"
+description = "Conway's Game of Life implementation in Python"
+authors = [{ name = "Anish Sarkar" }]
+readme = "README.md"
+requires-python = "3.12"
+
+[project.dependencies]
+pygame = "*"

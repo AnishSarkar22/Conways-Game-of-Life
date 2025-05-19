@@ -1,7 +1,5 @@
 # Conway's Game of Life
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). This also uses [Material UI](https://github.com/mui/material-ui).
-
 ## The rules for [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
 1. **Underpopulation**: A live cell with fewer than two live neighbors dies.
@@ -11,24 +9,27 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-1. To get started with the development server, run the following commands:
+1. To get started with the development server, install all dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Run the server:
 
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
-2. Then, open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
-3. You can start editing the page by modifying `pages/index.jsx`. The page auto-updates as you edit the file.
+2. Then, open [http://localhost:5173](http://localhost:5173) in your browser to see the result.
 
-## Game of Life with Python
+## Game of Life with Python (alternative)
 
 I have also created a python version of Game of Life.
 
 ### Prequisites
 
-- Python 3.x
+- Python 3.12
 - `venv` module (usually included with Python 3.x)
 
 ### Setting Up the Virtual Environment
