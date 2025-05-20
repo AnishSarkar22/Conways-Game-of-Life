@@ -14,20 +14,21 @@
         step: 1
     });
 
-    let grid = $state<boolean[][]>([]);
+    const rows = 22;
+    const cols = 22;
+
+    let grid = $state<boolean[][]>(
+        Array(rows).fill(undefined).map(() => Array(cols).fill(false))
+    );
     let isRunning = $state(false);
     let generation = $state(0);
     let speed = $derived($value[0] || 5);
     let intervalId: ReturnType<typeof setInterval> | null = null;
     let showSettings = $state(false);
     let showInfo = $state(false);
-
-    const rows = 22;
-    const cols = 22;
-
-    // Reactive declaration for media query
-    let isMobile = $derived(typeof window !== 'undefined' && window.innerWidth < 640);
-
+    let isMobile = $state(false);
+    let mounted = $state(false);
+    
     const createEmptyGrid = () => {
         return Array(rows)
             .fill(undefined)
@@ -35,17 +36,22 @@
     };
 
     onMount(() => {
-        grid = createEmptyGrid();
-
+        // Set initial mobile state
+        isMobile = window.innerWidth < 640;
+        
         // Setup window resize listener for mobile detection
         const handleResize = () => {
             isMobile = window.innerWidth < 640;
         };
 
         window.addEventListener('resize', handleResize);
+        
+        // Set mounted state to true
+        mounted = true;
 
         return () => {
             window.removeEventListener('resize', handleResize);
+            if (intervalId) clearInterval(intervalId);
         };
     });
 
@@ -117,7 +123,7 @@
     }
 </script>
 
-<div class="min-h-screen bg-[#111827] text-white py-8 px-4 font-sans">
+<div class="min-h-screen bg-[#111827] text-white py-8 px-4 font-sans {mounted ? 'mounted' : 'not-mounted'}">
     <div class="container mx-auto max-w-4xl">
         <!-- Header with animated gradient -->
         <header class="mb-8 relative overflow-hidden rounded-xl p-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 shadow-2xl border border-gray-700/50">
@@ -261,3 +267,13 @@
         </div>
     </div>
 </div>
+
+<style>
+    .not-mounted {
+        opacity: 0;
+    }
+    .mounted {
+        opacity: 1;
+        transition: opacity 0.3s ease-in;
+    }
+</style>

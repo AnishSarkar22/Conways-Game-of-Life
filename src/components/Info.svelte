@@ -64,7 +64,7 @@
         <!-- Desktop Layout -->
         <div class="hidden sm:grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
-            <ul class="space-y-4 text-gray-300">
+            <ul class="space-y-23 mt-17 text-gray-300">
               {#each populatedRules as rule}
                 <li class="flex items-start gap-2">
                   <div class="h-5 w-5 rounded-md bg-blue-500/20 border border-blue-500/40 flex items-center justify-center flex-shrink-0 mt-0.5">•</div>
@@ -113,9 +113,9 @@
           </ul>
           
           <h3 class="text-cyan-400 text-xl mb-4">Examples</h3>
-          <div class="space-y-10 flex flex-col items-center">
+                    <div class="space-y-10 flex flex-col items-center">
             {#each populatedExamples as example, index}
-              <div class="flex flex-col items-center space-y-3">
+              <div class="flex flex-col items-center space-y-3 {index !== populatedExamples.length - 1 ? 'pb-10 relative' : ''}">
                 <!-- Before Grid -->
                 <div class="grid grid-cols-3 gap-[1px] bg-gray-700 p-[1px] rounded shadow-md">
                   {#each example.before as color, i}
@@ -132,6 +132,11 @@
                     <div class="w-[30px] h-[30px]" style="background-color: {color};"></div>
                   {/each}
                 </div>
+                
+                <!-- Partial border line (not for the last item) -->
+                {#if index !== populatedExamples.length - 1}
+                  <div class="absolute bottom-0 w-30 h-px bg-gray-700"></div>
+                {/if}
               </div>
             {/each}
           </div>
@@ -145,7 +150,7 @@
         <!-- Desktop Layout -->
         <div class="hidden sm:grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
-            <ul class="space-y-4 text-gray-300">
+            <ul class="space-y-4 mt-16 text-gray-300">
               {#each emptyRules as rule}
                 <li class="flex items-start gap-2">
                   <div class="h-5 w-5 rounded-md bg-blue-500/20 border border-blue-500/40 flex items-center justify-center flex-shrink-0 mt-0.5">•</div>

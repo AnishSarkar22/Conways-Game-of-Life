@@ -17,11 +17,11 @@
     color: white; /* Text color */
   }
 
-  :global(.Board) {
+  /* :global(.Board) {
     position: relative;
     margin: 0 auto;
     background-color: #000;
-  }
+  } */
   
   :global(html) {
     background-color: #111827;

@@ -1,7 +1,13 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { onMount } from 'svelte';
 
   let hoveredCard: number | null = null;
+  let mounted = false;
+
+  onMount(() => {
+    mounted = true;
+  });
 
   const handleCardClick = (href: string, isExternal: boolean) => {
     if (isExternal) {
@@ -25,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 </svelte:head>
 
-<div class="container">
+<div class="container {mounted ? 'mounted' : ''}">
   <main>
     <h1 class="title">
       Welcome to Conway's<br/><span class="highlight">Game of Life</span>
@@ -63,6 +69,10 @@
     padding: 0 2rem;
   }
 
+  .container.mounted {
+    opacity: 1;
+  }
+
   main {
     max-width: 800px;
     width: 100%;
@@ -91,19 +101,6 @@
     width: 100%;
     margin-top: 3.5rem;
   }
-
-  /* .card {
-    padding: 1.5rem;
-    text-align: left;
-    color: #2d3748;
-    text-decoration: none;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-  } */
 
   .card {
     padding: 1.5rem;
@@ -158,29 +155,5 @@
     .grid {
       grid-template-columns: 1fr;
     }
-  }
-
-  :global(html, body) {
-    padding: 0;
-    margin: 0;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-      Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-
-  :global(*) {
-    box-sizing: border-box;
-  }
-
-  :global(button) {
-    border: none;
-    background: none;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    text-align: inherit;
   }
 </style>
